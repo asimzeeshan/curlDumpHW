@@ -4,12 +4,12 @@ require_once('core.php');
 // declare variables
 $h = $_POST['hostname'];
 
-
-$req_dump = print_r($_REQUEST, TRUE);
-$fp = fopen('dump.log', 'a');
-fwrite($fp, $req_dump);
-fwrite($fp, "\n\r\n\r");
-fclose($fp);
+// for debugging ONLY
+//$req_dump = print_r($_REQUEST, TRUE);
+//$fp = fopen('dump.log', 'a');
+//fwrite($fp, $req_dump);
+//fwrite($fp, "\n\r\n\r");
+//fclose($fp);
 
 if ($_REQUEST['rawdata']=="") { // 
 	echo "Houstan, we have a problem. Data not found";	
