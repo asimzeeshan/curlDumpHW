@@ -5,6 +5,7 @@ services:
     build:
       context: ./.docker
       dockerfile: Dockerfile
+    container_name: php7
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -25,6 +26,7 @@ services:
   mariadb:
     image: mariadb
     restart: always
+    container_name: mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=Nw9frt3w43XJ
       - MYSQL_DATABASE=curldump
