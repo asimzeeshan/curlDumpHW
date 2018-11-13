@@ -7,16 +7,21 @@ Close the repo and run docker-compose (ensure that its already installed)
     $ git clone https://github.com/asimzeeshan/curlDumpHW.git curldump
     $ cd curldump
     $ docker-compose up -d --build
-    $ docker exec -it curlhook_web_1 chmod 775 /var/www/html/dump.log
+    $ docker exec -it php7 docker-php-ext-install mysqli
+    $ docker exec -it php7 docker-php-ext-enable mysqli
+    $ docker exec -it php7 apachectl restart
+    $ docker exec -it php7 chmod 775 /var/www/html/dump.log
+    
+IMPORTANT: Login to phpMyAdmin at http://your-ip:3001/ and import the `schema.sql`
 
 ## How to enter the terminal?
 Simple, just run the following command (assuming the container id is curlhook_web_1
 
-    $ docker exec -it curlhook_web_1 bash
+    $ docker exec -it php7 bash
 
 ## What does it include?
 It includes the following
-  - PHP (compiled with apache) on debian:stretch-slim
+  - PHP 7.2 with apache on Debian 9 (stretch)
   - MariaDB
   - phpMyAdmin (for maintenance)
   
