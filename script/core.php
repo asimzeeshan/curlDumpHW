@@ -14,8 +14,8 @@ function getServerID($h) {
 
 	if (isset($h) && trim($h)!="") {
 		if ($result = $mysqli->query("SELECT id FROM servers WHERE hostname = '$h' LIMIT 1")) {
-	    	$row = $result->fetch_assoc();
-	    	return intval($row['id']);
+	    		$row = $result->fetch_assoc();
+	    		return intval($row['id']);
 		} else {
 			return false;
 		}
@@ -28,7 +28,7 @@ function addServer($h) {
 	global $mysqli;
 
 	if (isset($h) && trim($h)!="") {
-		$mysqli->query("INSERT INTO servers SET hostname='$h'");
+		if(!($mysqli->query("INSERT INTO servers SET hostname='$h'"))) { printf("ERROR: %s\n", mysqli_error($mysqli)); }
 		return $mysqli->insert_id;
 	}
 }
@@ -40,6 +40,6 @@ function addServerDump($id, $data) {
 	$path 		= $data['scriptpath'];
 	$data 		= addslashes($data['rawdata']);
 
-	$mysqli->query("INSERT INTO dumps SET server_id='$id', script_path='$path', data='$data'");
+	if(!($mysqli->query("INSERT INTO dumps SET server_id='$id', script_path='$path', data='$data'"))) { printf("ERROR: %s\n", mysqli_error($mysqli)); }
 	return $mysqli->insert_id;
 }
